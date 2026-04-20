@@ -402,6 +402,8 @@ parts:
       - name: console-disable
         allOrNoneOf:
           - path: cluster-tuning/console-disable/ConsoleOperatorDisable.yaml
+            config:
+              ignore-unspecified-fields: true
   - name: fetch-only
     description: |-
       These objects are only included so they are available to 'lookupCRs' functions in other templates; contents is not validated.
