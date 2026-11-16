@@ -63,8 +63,9 @@ Prometheus to discover the exporter target.
 
 For Mellanox NICs, follow Red Hat's [Secure Boot SR-IOV procedure](https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/hardware_networks/configuring-sriov-device#configuring-the-sr-iov-network-operator-on-mellanox-cards-when-secure-boot-is-enabled).
 Configure and verify the firmware SR-IOV enablement and maximum VF capacity
-before enabling Secure Boot. Then include the following field in the existing
-`SriovOperatorConfig` through the owning policy:
+before enabling Secure Boot. Include the optional
+`SriovOperatorConfig-SecureBoot.yaml` in the owning policy for the existing
+`SriovOperatorConfig`. It adds the following field:
 
 ```yaml
 spec:

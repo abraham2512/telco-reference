@@ -1,0 +1,11 @@
+# Optional: use only for Mellanox NICs with Secure Boot enabled.
+# Configure firmware SR-IOV capacity before enabling Secure Boot.
+# Merge with the existing SriovOperatorConfig and preserve other exclusions.
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovOperatorConfig
+metadata:
+  name: default
+  namespace: openshift-sriov-network-operator
+spec:
+  disablePlugins:
+    - mellanox
