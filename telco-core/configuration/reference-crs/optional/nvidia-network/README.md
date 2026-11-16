@@ -5,8 +5,16 @@ Install package `nvidia-network-operator`, channel `v26.7`, starting CSV
 The OperatorGroup watches its own namespace, as required by the certified bundle.
 Deliver installation and configuration using hub inform policies and TALM CGUs.
 
-The sample `NicClusterPolicy` enables the precompiled DOCA driver and DOCA
-Telemetry Service. Reuse the shared Red Hat NFD deployment and OpenShift's
+## Sample NicClusterPolicy
+
+[`NicClusterPolicy.yaml`](NicClusterPolicy.yaml) is an illustrative operand
+configuration, not an enforced reference requirement. Customers and partners own
+its contents and select component versions with NVIDIA. It is not included in
+the baseline/group policies or kube-compare validation. Copy and customize it for
+your deployment after installing the operator.
+
+The sample enables the precompiled DOCA driver and DOCA Telemetry Service.
+Reuse the shared Red Hat NFD deployment and OpenShift's
 Multus, CNI plugins and SR-IOV Network Operator. Avoid allocating the same NIC
 through multiple device plugins. Add RDMA shared-device resources only for
 explicitly selected interfaces that are not owned by another resource pool.
@@ -63,9 +71,8 @@ Prometheus to discover the exporter target.
 
 For Mellanox NICs, follow Red Hat's [Secure Boot SR-IOV procedure](https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/hardware_networks/configuring-sriov-device#configuring-the-sr-iov-network-operator-on-mellanox-cards-when-secure-boot-is-enabled).
 Configure and verify the firmware SR-IOV enablement and maximum VF capacity
-before enabling Secure Boot. Include the optional
-`SriovOperatorConfig-SecureBoot.yaml` in the owning policy for the existing
-`SriovOperatorConfig`. It adds the following field:
+before enabling Secure Boot. Add the following field to the owning policy for
+the existing `SriovOperatorConfig`:
 
 ```yaml
 spec:

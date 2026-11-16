@@ -1,5 +1,5 @@
-# This CR verifies the installation/upgrade of the NVIDIA Network Operator.
 ---
+# This CR verifies the installation/upgrade of the NVIDIA Network Operator.
 apiVersion: operators.coreos.com/v1
 kind: Operator
 metadata:
