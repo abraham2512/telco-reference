@@ -58,3 +58,24 @@ policy remediation. These resources do not define alerts or custom GPU metrics.
 The namespace-scoped Role grants `openshift-monitoring/prometheus-k8s` read-only
 discovery of Services, Endpoints and Pods. The RoleBinding is required for
 Prometheus to discover the exporter target.
+
+## SR-IOV with Secure Boot
+
+For Mellanox NICs, follow Red Hat's [Secure Boot SR-IOV procedure](https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/hardware_networks/configuring-sriov-device#configuring-the-sr-iov-network-operator-on-mellanox-cards-when-secure-boot-is-enabled).
+Configure and verify the firmware SR-IOV enablement and maximum VF capacity
+before enabling Secure Boot. Then include the following field in the existing
+`SriovOperatorConfig` through the owning policy:
+
+```yaml
+spec:
+  disablePlugins:
+    - mellanox
+```
+
+This skips the SR-IOV operator's Mellanox firmware configuration plugin; it does
+not disable the NIC driver or kernel lockdown. Preserve other existing plugin
+exclusions. Verify `SriovNetworkNodeState` reaches `Succeeded`, requested VFs
+exist and the device plugin is Ready before scheduling SR-IOV workloads.
+Kernel-reported VF capacity alone is not a direct query of persistent firmware
+settings. This prerequisite is conditional on Secure Boot and Mellanox hardware;
+do not apply it universally to other deployment configurations.
