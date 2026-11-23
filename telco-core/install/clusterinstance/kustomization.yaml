@@ -23,5 +23,21 @@ configMapGenerator:
   - custom-manifests/mcp-worker-3.yaml
   name: custom-manifests-configmap
   namespace: example-standard
+# Optional NVIDIA video workaround: uncomment this generator and the matching
+# extraManifestsRefs entry. Use the target ClusterInstance namespace and include
+# only the master/worker files needed by affected GPU nodes.
+# - name: nvidia-video-workaround
+#   namespace: example-standard
+#   files:
+#   - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-master.yaml
+#   - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-worker.yaml
+# Optional DMA-BUF PCIe configuration: verify hardware/topology prerequisites
+# before enabling this generator and the matching extraManifestsRefs entry.
+# Include only roles hosting the target GPU and NIC devices.
+# - name: nvidia-dmabuf-pcie
+#   namespace: example-standard
+#   files:
+#   - extra-manifests/optional/nvidia-gpu-operator/99-nvidia-dmabuf-pcie-master.yaml
+#   - extra-manifests/optional/nvidia-gpu-operator/99-nvidia-dmabuf-pcie-worker.yaml
 generatorOptions:
   disableNameSuffixHash: true
