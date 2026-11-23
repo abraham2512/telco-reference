@@ -74,6 +74,11 @@ policies:
     - path: reference-crs/storage-lso/StorageSubscription.yaml
     - path: reference-crs/storage-lso/StorageOperatorStatus.yaml
     #
+    # NVIDIA Network Operator (optional; requires a certified catalog on the spoke)
+    # - path: reference-crs/nvidia-network-operator/NvidiaNetworkSubscriptionNS.yaml
+    # - path: reference-crs/nvidia-network-operator/NvidiaNetworkSubscriptionOperGroup.yaml
+    # - path: reference-crs/nvidia-network-operator/NvidiaNetworkSubscription.yaml
+    #
     # LCA operator is used for orchestrating Image Based Upgrade for SNO
     # - path: reference-crs/lca/LcaSubscriptionNS.yaml
     # - path: reference-crs/lca/LcaSubscriptionOperGroup.yaml
