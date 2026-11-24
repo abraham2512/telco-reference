@@ -72,13 +72,7 @@ policies:
 
 - Update PolicyGenerator patches for Subscription `channel: <value>`.
 - Update every versioned image in source CRs and PolicyGenerator patches, including optional operators. Updating the catalog or Subscription does not update an explicitly configured operand image.
-- For NFD, update `spec.operand.image` in both deployable `NodeFeatureDiscovery.yaml` files:
-  - `telco-core/configuration/reference-crs/optional/nfd/NodeFeatureDiscovery.yaml`
-  - `telco-ran/configuration/reference-crs/nfd-operator/NodeFeatureDiscovery.yaml`
-- For the 5.1 reference, the NFD image is `registry.redhat.io/openshift4/ose-node-feature-discovery-rhel9:v5.1`. Verify the published pullspec for the target release; do not infer a registry repository rename from the release number.
-- NFD's kube-compare templates read `{{ .spec.operand.image }}` from the compared resource. Keep those templates release-independent, and update the sample image in `telco-ran/configuration/kube-compare-reference/hack/default_value.yaml`.
-- Review site-specific PolicyGenerator and PolicyGenTemplate image overrides, so they do not retain the previous operand tag.
-- NFD uses the rolling `stable` Subscription channel; its explicit operand image still needs a release update. Mirror that selected image when enabling optional NFD in disconnected environments; NFD is not part of the default Hub image set.
+- NFD uses the rolling `stable` channel and selects its operand image from the installed operator. For optional disconnected deployments, verify that the target catalog and mirror include the operator bundle and its related images. Review any site-specific operand image overrides when upgrading.
 
 ### 3. OpenAPI Schema for PolicyGenerator List Merging
 
@@ -98,7 +92,6 @@ for that CRD entry in `hack/crd-schema-config.json`.
 ### 4. Image references
 The reference configuration includes image pullspecs in several places which use version specific tags for the image. These must be updated. These pullspecs may be in the reference-crs or in PolicyGenerator patches. Common places where image tags are used include:
 - CatalogSource images -- Update both the reference-cr and the PolicyGenerator overlay patch to align with the OpenShift version
-- Node Feature Discovery (NFD) -- Update `spec.operand.image` in Core/RAN deployable CRs and the RAN comparison sample default; see section 2.
 - Numa Resources Operator (NROP) -- Update image spec in the Scheduler (sched.yaml) and PolicyGenerator overlay patch to align with the OpenShift version
 - Upgrade policy -- Update the version and image pull spec in the PolicyGenerator overlay patch to align with the OpenShift version
 - The telco-hub reference includes a plugins Policy CR with image pullspec references which must be updated to the correct versions. The ztp-site-generate image aligns with OpenShift. The multicluster-operator image aligns with MCE.
@@ -179,7 +172,6 @@ Understanding different operator versioning schemes:
 | GitOps | `gitops-X.Y` | `gitops-1.19` | Independent versioning |
 | ACM | `release-X.Y` | `release-5.1` | Target post-5.0 reference release; verify compatibility |
 | MCE | `stable-X.Y` | `stable-5.1` | Supported ACM/MCE pairing for the target release |
-| NFD operand | `vX.Y` | `v5.1` | OpenShift release; Subscription channel remains `stable` |
 | TALM, MetalLB, SR-IOV | `stable` | `stable` | Rolling channel |
 
 ## Common Pitfalls
@@ -242,7 +234,6 @@ grep -r "^kind: ClusterInstance"
 Update all version references for OpenShift 5.1
 - ACM: release-5.1
 - MCE: stable-5.1
-- NFD operand: v5.1
 - GitOps Operator: 1.21
 - Cluster Logging Operator: 6.7
 - ODF: 5.0

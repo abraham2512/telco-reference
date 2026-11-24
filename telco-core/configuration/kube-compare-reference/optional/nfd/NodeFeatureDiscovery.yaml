@@ -6,7 +6,6 @@ metadata:
   namespace: openshift-nfd
 spec:
   operand:
-    image: {{ .spec.operand.image }}
     imagePullPolicy: IfNotPresent
     servicePort: 12000
   topologyUpdater: false
