@@ -61,6 +61,5 @@ reasonable `maxUnavailable: <value>` for your use case.
 
 ### Optional GPU video-module workaround
 
-Enable the commented `nvidia-video-workaround` ConfigMap generator in
-`clusterinstance/kustomization.yaml` and its `extraManifestsRefs` entry in
-`clusterinstance/example-standard-clusterinstance.yaml` for affected GPU nodes.
+Uncomment the video MachineConfig entries for affected node roles in the
+extra-manifests ConfigMap generator in `clusterinstance/kustomization.yaml`.

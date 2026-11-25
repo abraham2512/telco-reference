@@ -33,6 +33,6 @@ Github CI 'ci-job' will fail if you don't commit the source changes and the
 rendered yaml in the same PR.
 
 The `50-nvidia-video` builder generates the optional video-module workaround
-under the install extra-manifests directory. Enable it through the commented
-`nvidia-video-workaround` ConfigMap generator. Keep its Core install copies aligned
+under the install extra-manifests directory. Enable it through the commented file entries
+in the extra-manifests ConfigMap generator. Keep its Core install copies aligned
 when regenerating these files.

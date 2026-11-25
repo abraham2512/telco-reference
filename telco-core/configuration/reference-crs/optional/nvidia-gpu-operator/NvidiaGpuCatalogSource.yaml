@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-marketplace
 spec:
   displayName: Certified Operators (disconnected)
-  image: registry.example.com:5000/openshift-marketplace/certified-operators-disconnected:v4.22
+  image: registry.example.com:5000/openshift-marketplace/certified-operators-disconnected:v5.1
   publisher: Red Hat
   sourceType: grpc
 status:

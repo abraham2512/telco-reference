@@ -15,6 +15,9 @@ configMapGenerator:
   - extra-manifests/mount_namespace_config_worker.yaml
   - extra-manifests/sctp_module_mc.yaml
   - extra-manifests/worker-load-kernel-modules.yaml
+  # Optional: load video at boot for roles whose precompiled NVIDIA driver needs it.
+  # - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-master.yaml
+  # - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-worker.yaml
   name: extra-manifests-configmap
   namespace: example-standard
 - files:
@@ -23,13 +26,5 @@ configMapGenerator:
   - custom-manifests/mcp-worker-3.yaml
   name: custom-manifests-configmap
   namespace: example-standard
-# Optional NVIDIA video workaround: uncomment this generator and the matching
-# extraManifestsRefs entry. Use the target ClusterInstance namespace and include
-# only the master/worker files needed by affected GPU nodes.
-# - name: nvidia-video-workaround
-#   namespace: example-standard
-#   files:
-#   - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-master.yaml
-#   - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-worker.yaml
 generatorOptions:
   disableNameSuffixHash: true

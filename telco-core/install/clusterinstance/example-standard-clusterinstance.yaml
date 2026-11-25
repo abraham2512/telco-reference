@@ -26,8 +26,6 @@ spec:
   extraManifestsRefs:
     - name: extra-manifests-configmap
     - name: custom-manifests-configmap
-    # Optional: enable the matching ConfigMap generator for affected GPU nodes.
-    # - name: nvidia-video-workaround
   extraLabels:
     ManagedCluster:
       common: "core"
