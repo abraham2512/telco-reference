@@ -472,6 +472,9 @@ parts:
           - path: nvidia-gpu-operator/NvidiaGpuSubscriptionNS.yaml
           - path: nvidia-gpu-operator/NvidiaGpuSubscriptionOperGroup.yaml
           - path: nvidia-gpu-operator/NvidiaGpuSubscription.yaml
+            config:
+              fieldsToOmitRefs:
+                - subscriptions
       - name: optional-certified-catalog
         anyOf:
           - path: nvidia-gpu-operator/NvidiaGpuCatalogSource.yaml
