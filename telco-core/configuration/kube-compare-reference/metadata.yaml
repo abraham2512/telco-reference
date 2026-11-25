@@ -246,13 +246,6 @@ parts:
           - path: optional/nvidia-network/DocaTelemetryRoleBinding.yaml
           - path: optional/nvidia-network/DocaTelemetryService.yaml
           - path: optional/nvidia-network/DocaTelemetryServiceMonitor.yaml
-      - name: nvidia-network-status
-        anyOf:
-          - path: optional/nvidia-network/NvidiaNetworkOperatorStatus.yaml
-            config:
-              ignore-unspecified-fields: true
-              fieldsToOmitRefs:
-                - allowStatusCheck
 
 templateFunctionFiles:
   - version_match.tmpl
