@@ -31,13 +31,5 @@ configMapGenerator:
 #   files:
 #   - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-master.yaml
 #   - extra-manifests/optional/nvidia-gpu-operator/50-nvidia-video-worker.yaml
-# Optional DMA-BUF PCIe configuration: verify hardware/topology prerequisites
-# before enabling this generator and the matching extraManifestsRefs entry.
-# Include only roles hosting the target GPU and NIC devices.
-# - name: nvidia-dmabuf-pcie
-#   namespace: example-standard
-#   files:
-#   - extra-manifests/optional/nvidia-gpu-operator/99-nvidia-dmabuf-pcie-master.yaml
-#   - extra-manifests/optional/nvidia-gpu-operator/99-nvidia-dmabuf-pcie-worker.yaml
 generatorOptions:
   disableNameSuffixHash: true

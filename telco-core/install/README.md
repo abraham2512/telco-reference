@@ -59,12 +59,8 @@ is applied). The assumption is that post-installation the Machine Config Pools
 will be set to `paused: false` and when nodes are ready the MCP set to a
 reasonable `maxUnavailable: <value>` for your use case.
 
-### Optional GPU installation configuration
+### Optional GPU video-module workaround
 
-`extra-manifests/optional/nvidia-gpu-operator/` contains the optional video-module
-workaround and GPU/NIC PCIe routing MachineConfigs. Check their prerequisites,
-then enable the corresponding commented `nvidia-video-workaround` or
-`nvidia-dmabuf-pcie` ConfigMap generator in `kustomization.yaml` and its
-`extraManifestsRefs` entry in `example-standard-clusterinstance.yaml`. Set the
-ConfigMap namespace to the cluster namespace and select only the required
-master/worker files.
+Enable the commented `nvidia-video-workaround` ConfigMap generator in
+`clusterinstance/kustomization.yaml` and its `extraManifestsRefs` entry in
+`clusterinstance/example-standard-clusterinstance.yaml` for affected GPU nodes.

@@ -19,41 +19,9 @@ spec:
   driver:
     enabled: true
     useNvidiaDriverCRD: true
-    kernelModuleType: open
-    upgradePolicy:
-      autoUpgrade: true
-      drain:
-        deleteEmptyDir: false
-        enable: false
-        force: false
-        timeoutSeconds: 300
-      maxParallelUpgrades: 1
-      maxUnavailable: 25%
-      podDeletion:
-        deleteEmptyDir: false
-        force: false
-        timeoutSeconds: 300
-      waitForCompletion:
-        timeoutSeconds: 0
-    repoConfig:
-      configMapName: ''
-    certConfig:
-      name: ''
-    licensingConfig:
-      nlsEnabled: true
-      secretName: ''
-    virtualTopology:
-      config: ''
-    kernelModuleConfig:
-      name: ''
     usePrecompiled: true
-    repository: registry.example.com:5000/nvidia
-    image: gpu-driver-rhel10
-    version: 595.91.07
   dcgmExporter:
     enabled: true
-    config:
-      name: ''
     serviceMonitor:
       enabled: true
   dcgm:
@@ -64,9 +32,6 @@ spec:
       maxUnavailable: '1'
   devicePlugin:
     enabled: true
-    config:
-      name: ''
-      default: ''
     mps:
       root: /run/nvidia/mps
   gfd:
@@ -79,9 +44,6 @@ spec:
     strategy: single
   toolkit:
     enabled: true
-  validator:
-    plugin:
-      env: []
   vgpuManager:
     enabled: false
   vgpuDeviceManager:
