@@ -23,42 +23,12 @@ Before applying the sample, create the `ofed-pull-secret` image pull secret
 in the `nvidia-network-operator` namespace with credentials for your mirror.
 Update `spec.ofedDriver.imagePullSecrets` if you use a different secret name.
 
-The driver digest in this sample is a lab-validated image-content selection:
-`registry.stage.redhat.io/nvidia/doca-driver-rhel10@sha256:02792cf44b818d2f1bb319a3df5907c4510331318e2add0152e723a5013050cf`.
-Its `mlx5_core.ko` vermagic is
-`6.12.0-211.69.1.el10_2.aarch64+64k`; it has an appended module signature.
 Select and mirror a matching image for every target kernel and verify the
 signer's trust before Secure Boot testing. `forcePrecompiled: true` prevents
 fallback to runtime compilation. Image-content inspection alone does not prove
 successful loading or Secure Boot acceptance.
 
-## Functional validation
-
-Record versions, kernel, NIC firmware, image digests, driver module provenance,
-Secure Boot state, policy readiness and logs for each case.
-
-| Check | Evidence required | Current status |
-| --- | --- | --- |
-| OLM | CSV Succeeded; NicClusterPolicy CRD Established | Pending |
-| Precompiled driver | Driver ready; expected modules loaded; no runtime compilation | Image ABI matched; runtime pending |
-| Secure Boot disabled | Firmware state, driver loading and networking pass | Pending |
-| Secure Boot enabled | Trusted module signer, successful load, no signature rejection | Pending |
-| Metrics | Exporter ready; endpoint counters; successful Prometheus scrape | Pending |
-| Platform CPU | Compare idle platform CPU before/after; record requests and actual CPU affinity | Pending |
-| Pod kernel networking | Bidirectional connectivity over pod interfaces | Pending |
-| Machine networking | Host connectivity to a peer over the selected NIC | Pending |
-| SR-IOV kernel networking | VFs allocated; bidirectional pod connectivity using netdevice | Pending |
-| SR-IOV DPDK | Existing DPDK test application forwards packets on allocated VFs | Pending |
-
-Use existing connectivity tools and DPDK test applications. A packet-forwarding
-check establishes functionality; throughput and latency benchmarking are outside
-scope. Secure Boot changes require a coordinated reboot. Machine and SR-IOV
-checks require a reachable peer and known NIC/switch connectivity.
-
-Runtime driver compilation and customer-defined GPU alerts/metrics are excluded.
-NIC-to-GPU DMA remains a feasibility item: first inspect the selected precompiled
-GPU/DOCA drivers and peer-memory support, then decide whether a functional test
-is possible. Do not claim this capability based only on operator readiness.
+## DOCA telemetry metrics
 
 Include `DocaTelemetryService.yaml`, `DocaTelemetryServiceMonitor.yaml`,
 `DocaTelemetryRole.yaml` and `DocaTelemetryRoleBinding.yaml` alongside
@@ -73,7 +43,7 @@ Prometheus to discover the exporter target.
 
 ## SR-IOV with Secure Boot
 
-For Mellanox NICs, follow Red Hat's [Secure Boot SR-IOV procedure](https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/hardware_networks/configuring-sriov-device#configuring-the-sr-iov-network-operator-on-mellanox-cards-when-secure-boot-is-enabled).
+For Mellanox NICs, follow Red Hat's [Secure Boot SR-IOV procedure](https://docs.redhat.com/en/documentation/openshift_container_platform/5.1/html/hardware_networks/configuring-sriov-device#configuring-the-sr-iov-network-operator-on-mellanox-cards-when-secure-boot-is-enabled).
 Configure and verify the firmware SR-IOV enablement and maximum VF capacity
 before enabling Secure Boot. Add the following field to the owning policy for
 the existing `SriovOperatorConfig`:
