@@ -2,7 +2,7 @@
 
 These configuration CRs install the NVIDIA GPU Operator on a compatible GPU-accelerated node.
 
-Prerequisites include a shared Red Hat NFD deployment and mirroring the required certified catalog content.
+Prerequisites include a shared Red Hat NFD deployment and mirroring the required certified catalog content. For GPUDirect RDMA, follow the upstream vendor setup instructions for your hardware, including any PCIe ACS requirements.
 
 NVIDIA GPU Operator container images are not signed, which can cause signature-related failures when mirroring with `oc-mirror` v2. Follow the [Red Hat procedure for disabling signature verification for the affected mirror source](https://access.redhat.com/solutions/7139982).
 

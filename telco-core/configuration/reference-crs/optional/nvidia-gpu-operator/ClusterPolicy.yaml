@@ -15,7 +15,7 @@ spec:
     defaultWorkload: container
     mode: kubevirt
   driver:
-    enabled: true
+    enabled: false
     useNvidiaDriverCRD: true
     usePrecompiled: true
   dcgmExporter:
